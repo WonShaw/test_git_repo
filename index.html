@@ -4,6 +4,17 @@
     <title>Hello World</title>
 </head>
 <body>
-    <p style="color: blue;">Hello World!</p>
+    <p style="color: blue;" id="greeting-text">Loading greeting...</p>
+    <script>
+        fetch('http://localhost:8000/greetings')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('greeting-text').innerText = data;
+            })
+            .catch(error => {
+                document.getElementById('greeting-text').innerText = 'Failed to load greeting.';
+                console.error('Error fetching greeting:', error);
+            });
+    </script>
 </body>
 </html>
